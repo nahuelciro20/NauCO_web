@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NauCO Automation — Automatización industrial y sistemas a medida</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #131A22;
+    --navy-2: #1B2530;
+    --blue: #2B6CB0;
+    --blue-light: #EBF4FF;
+    --gray: #4A5568;
+    --gray-light: #A0AEC0;
+    --amber: #ED8936;
+    --white: #FFFFFF;
+    --line: #E2E8F0;
+    --radius: 6px;
+    --max: 1080px;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    font-family: 'IBM Plex Sans', Arial, sans-serif;
+    color: var(--gray);
+    background: var(--white);
+    line-height: 1.55;
+  }
+
+  h1, h2, h3, .logo {
+    font-family: 'Space Grotesk', 'IBM Plex Sans', sans-serif;
+    color: var(--navy);
+    margin: 0;
+  }
+
+  a { color: inherit; }
+
+  img, svg { max-width: 100%; display: block; }
+
+  .wrap {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--amber);
+    outline-offset: 2px;
+  }
+
+  /* ---------- Scroll reveal ---------- */
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .reveal.in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .reveal-stagger.in-view > * {
+    transition-delay: calc(var(--i, 0) * 90ms);
+  }
+
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.35; }
+  }
+
+  @keyframes belt-scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { transition: none !important; animation: none !important; }
+    .reveal { opacity: 1; transform: none; }
+    .belt-track { transform: none !important; }
+  }
+
+  /* ---------- Header / nav ---------- */
+
+  header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    transition: background 0.3s ease, box-shadow 0.3s ease, backdrop-filter 0.3s ease;
+  }
+
+  header.scrolled {
+    background: rgba(19, 26, 34, 0.92);
+    backdrop-filter: blur(8px);
+    box-shadow: 0 2px 14px rgba(0, 0, 0, 0.18);
+  }
+
+  section, footer {
+    scroll-margin-top: 84px;
+  }
+
+  .nav-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 28px 24px;
+  }
+
+  .logo {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--white);
+    letter-spacing: 0.01em;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .logo span { color: var(--amber); }
+
+  .logo img {
+    width: 50px;
+    height: 50px;
+    border-radius: 8px;
+    background: var(--white);
+    padding: 4px;
+  }
+
+  footer .logo img {
+    background: transparent;
+    padding: 0;
+  }
+
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 28px;
+    margin: 0;
+    padding: 0;
+  }
+
+  nav a {
+    text-decoration: none;
+    color: var(--blue-light);
+    font-size: 0.95rem;
+    transition: color 0.2s ease;
+  }
+
+  nav a:hover { color: var(--white); }
+
+  @media (max-width: 620px) {
+    nav ul { gap: 16px; }
+    nav a { font-size: 0.85rem; }
+  }
+
+  /* ---------- Hero ---------- */
+
+  .hero {
+    background: var(--navy);
+    color: var(--blue-light);
+    padding: 130px 0 90px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 40px;
+    align-items: center;
+  }
+
+  @media (max-width: 860px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero-diagram { order: -1; max-width: 320px; margin: 0 auto 20px; }
+  }
+
+  .hero h1 {
+    color: var(--white);
+    font-size: clamp(2rem, 4.2vw, 3rem);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+  }
+
+  .hero p.lead {
+    margin-top: 20px;
+    font-size: 1.08rem;
+    max-width: 46ch;
+    color: var(--gray-light);
+  }
+
+  .hero-actions {
+    margin-top: 34px;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 13px 26px;
+    border-radius: var(--radius);
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-decoration: none;
+    font-family: 'IBM Plex Sans', sans-serif;
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+  }
+
+  .btn-primary {
+    background: var(--blue);
+    color: var(--white);
+  }
+
+  .btn-primary:hover { background: #2C5D96; transform: translateY(-1px); }
+
+  .btn-ghost {
+    border: 1px solid #33414F;
+    color: var(--blue-light);
+  }
+
+  .btn-ghost:hover { border-color: var(--blue-light); }
+
+  .pulse { animation: pulse-dot 2.2s ease-in-out infinite; }
+  .pulse-2 { animation-delay: 0.4s; }
+  .pulse-3 { animation-delay: 0.8s; }
+
+  /* ---------- Section shell ---------- */
+
+  section { padding: 84px 0; }
+
+  .section-head {
+    max-width: 56ch;
+    margin-bottom: 48px;
+  }
+
+  .section-head h2 {
+    font-size: clamp(1.5rem, 2.6vw, 1.9rem);
+    font-weight: 600;
+  }
+
+  .section-head p {
+    margin-top: 12px;
+    font-size: 1.02rem;
+  }
+
+  /* ---------- Services (datasheet list, not cards) ---------- */
+
+  .service-row {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 24px;
+    padding: 26px 0;
+    border-top: 1px solid var(--line);
+    transition: background 0.2s ease, padding-left 0.2s ease;
+  }
+
+  .service-row:hover {
+    background: var(--blue-light);
+    padding-left: 12px;
+  }
+
+  .services-list .service-row:last-child { border-bottom: 1px solid var(--line); }
+
+  .service-row h3 {
+    font-size: 1.08rem;
+    font-weight: 600;
+  }
+
+  .service-row p { margin: 0; font-size: 0.98rem; }
+
+  @media (max-width: 700px) {
+    .service-row { grid-template-columns: 1fr; gap: 6px; }
+  }
+
+  /* ---------- Colaboradores ---------- */
+
+  .collab-row {
+    display: grid;
+    grid-template-columns: 240px 1fr auto;
+    gap: 24px;
+    align-items: center;
+    padding: 26px 0;
+    border-top: 1px solid var(--line);
+    transition: background 0.2s ease, padding-left 0.2s ease;
+  }
+
+  .collab-list .collab-row:last-child { border-bottom: 1px solid var(--line); }
+
+  .collab-row:hover { background: var(--blue-light); padding-left: 12px; }
+
+  .collab-name h3 {
+    font-size: 1.05rem;
+    font-weight: 600;
+  }
+
+  .collab-name span {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--blue);
+    margin-top: 2px;
+  }
+
+  .collab-row p { margin: 0; font-size: 0.96rem; }
+
+  .collab-link {
+    justify-self: end;
+    white-space: nowrap;
+    font-size: 0.92rem;
+    font-weight: 500;
+    color: var(--blue);
+    text-decoration: none;
+    border: 1px solid var(--line);
+    padding: 9px 18px;
+    border-radius: var(--radius);
+    transition: border-color 0.2s ease, color 0.2s ease;
+  }
+
+  .collab-link:hover { border-color: var(--blue); }
+
+  @media (max-width: 760px) {
+    .collab-row { grid-template-columns: 1fr; gap: 8px; }
+    .collab-link { justify-self: start; }
+  }
+
+  /* ---------- Proyectos (cinta con movimiento continuo) ---------- */
+
+  .projects { background: var(--navy-2); padding: 72px 0; overflow: hidden; }
+
+  .projects .section-head h2,
+  .projects .section-head p { color: var(--white); }
+
+  .projects .section-head p { color: var(--gray-light); }
+
+  .belt-viewport { overflow: hidden; }
+
+  .belt-track {
+    display: flex;
+    gap: 20px;
+    width: max-content;
+    animation: belt-scroll 28s linear infinite;
+  }
+
+  .belt-viewport:hover .belt-track { animation-play-state: paused; }
+
+  .project-card {
+    flex: 0 0 auto;
+    width: 300px;
+  }
+
+  .project-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: var(--radius);
+  }
+
+  .project-card p {
+    margin: 10px 2px 0;
+    font-size: 0.88rem;
+    color: var(--gray-light);
+  }
+
+  /* ---------- About ---------- */
+
+  .about {
+    background: var(--blue-light);
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+
+  @media (max-width: 780px) {
+    .about-grid { grid-template-columns: 1fr; }
+  }
+
+  .about h2 { font-size: clamp(1.5rem, 2.6vw, 1.9rem); }
+
+  .about p { font-size: 1.02rem; margin-top: 16px; }
+
+  .about-photo {
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+
+  .about-photo img {
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+    transform: scale(1.08);
+    animation: about-zoom 14s ease-in-out infinite alternate;
+  }
+
+  @keyframes about-zoom {
+    from { transform: scale(1.08); }
+    to { transform: scale(1); }
+  }
+
+  .about-facts {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+
+  .fact {
+    border-left: 2px solid var(--blue);
+    padding-left: 16px;
+  }
+
+  .fact h4 {
+    margin: 0 0 4px;
+    font-family: 'Space Grotesk', sans-serif;
+    color: var(--navy);
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  .fact p { margin: 0; font-size: 0.95rem; }
+
+  /* ---------- Contact ---------- */
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 56px;
+  }
+
+  @media (max-width: 780px) {
+    .contact-grid { grid-template-columns: 1fr; }
+  }
+
+  .contact-info p { font-size: 1rem; }
+
+  .contact-line {
+    margin: 22px 0;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .contact-line span {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--gray-light);
+    margin-bottom: 4px;
+  }
+
+  .contact-line a, .contact-line strong {
+    font-size: 1.08rem;
+    color: var(--navy);
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .contact-line a:hover { color: var(--blue); }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  label {
+    font-size: 0.88rem;
+    color: var(--navy);
+    font-weight: 500;
+    margin-bottom: 6px;
+    display: block;
+  }
+
+  input, textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 0.98rem;
+    color: var(--navy);
+    background: var(--white);
+    transition: border-color 0.2s ease;
+  }
+
+  input:focus, textarea:focus {
+    border-color: var(--blue);
+  }
+
+  textarea { resize: vertical; min-height: 120px; }
+
+  .form-submit {
+    align-self: flex-start;
+    margin-top: 6px;
+    background: var(--blue);
+    color: var(--white);
+    border: none;
+    padding: 13px 28px;
+    border-radius: var(--radius);
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: 'IBM Plex Sans', sans-serif;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+
+  .form-submit:hover { background: #2C5D96; transform: translateY(-1px); }
+
+  /* ---------- Footer ---------- */
+
+  footer {
+    background: var(--navy);
+    color: var(--gray-light);
+    padding: 32px 0;
+    font-size: 0.88rem;
+  }
+
+  .footer-row {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .footer-row .logo { font-size: 0.95rem; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav-row">
+    <div class="logo"><img src="logo-icon.png" alt="Logo NauCO Automation">NauCO<span>·</span>Automation</div>
+    <nav>
+      <ul>
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#proyectos">Proyectos</a></li>
+        <li><a href="#sobre-mi">Nosotros</a></li>
+        <li><a href="#colaboradores">Colaboradores</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <h1>Automatización industrial y sistemas a medida para tu línea de producción.</h1>
+      <p class="lead">Programación de PLC, robótica, monitoreo de datos en tiempo real y desarrollo de software para plantas y procesos industriales.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#contacto">Hablemos de tu proyecto</a>
+        <a class="btn btn-ghost" href="#servicios">Ver servicios</a>
+      </div>
+    </div>
+    <div class="hero-diagram" aria-hidden="true">
+      <svg viewBox="0 0 460 340" xmlns="http://www.w3.org/2000/svg">
+        <!-- Líneas: PLC al centro, conectado a cada nodo -->
+        <g fill="none" stroke="#2B6CB0" stroke-width="1.5">
+          <path d="M195 170 H120" />
+          <path d="M215 145 L175 75" />
+          <path d="M255 145 L285 75" />
+          <path d="M265 170 H340" />
+          <path d="M255 195 L285 265" />
+          <path d="M215 195 L175 265" />
+        </g>
+
+        <!-- PLC central -->
+        <rect x="195" y="140" width="70" height="60" rx="4" fill="#1B2530" stroke="#ED8936" stroke-width="1.5" />
+        <text x="230" y="175" text-anchor="middle" font-family="Space Grotesk" font-size="13" fill="#F7FAFC" font-weight="600">PLC</text>
+
+        <!-- Nodos periféricos -->
+        <circle cx="120" cy="170" r="24" fill="#1B2530" stroke="#2B6CB0" stroke-width="1.5" />
+        <text x="120" y="174" text-anchor="middle" font-family="IBM Plex Sans" font-size="8" fill="#A0AEC0">SENSOR</text>
+
+        <rect x="140" y="55" width="70" height="40" rx="4" fill="#1B2530" stroke="#2B6CB0" stroke-width="1.5" />
+        <text x="175" y="79" text-anchor="middle" font-family="IBM Plex Sans" font-size="9" fill="#A0AEC0">SCADA</text>
+
+        <rect x="250" y="55" width="70" height="40" rx="4" fill="#1B2530" stroke="#2B6CB0" stroke-width="1.5" />
+        <text x="285" y="79" text-anchor="middle" font-family="IBM Plex Sans" font-size="9" fill="#A0AEC0">IOT</text>
+
+        <rect x="340" y="150" width="72" height="40" rx="4" fill="#1B2530" stroke="#2B6CB0" stroke-width="1.5" />
+        <text x="376" y="174" text-anchor="middle" font-family="IBM Plex Sans" font-size="8.5" fill="#A0AEC0">WEBAPP</text>
+
+        <rect x="250" y="245" width="70" height="40" rx="4" fill="#1B2530" stroke="#2B6CB0" stroke-width="1.5" />
+        <text x="285" y="269" text-anchor="middle" font-family="IBM Plex Sans" font-size="9" fill="#A0AEC0">SQL</text>
+
+        <rect x="140" y="245" width="70" height="40" rx="4" fill="#1B2530" stroke="#2B6CB0" stroke-width="1.5" />
+        <text x="175" y="269" text-anchor="middle" font-family="IBM Plex Sans" font-size="9" fill="#A0AEC0">IOT DATA</text>
+
+        <!-- Luces de señal recorriendo la red -->
+        <g fill="#ED8936">
+          <circle class="pulse" style="animation-delay:0s" cx="158" cy="170" r="3" />
+          <circle class="pulse" style="animation-delay:0.3s" cx="218" cy="112" r="3" />
+          <circle class="pulse" style="animation-delay:0.6s" cx="268" cy="112" r="3" />
+          <circle class="pulse" style="animation-delay:0.9s" cx="303" cy="170" r="3" />
+          <circle class="pulse" style="animation-delay:1.2s" cx="268" cy="228" r="3" />
+          <circle class="pulse" style="animation-delay:1.5s" cx="218" cy="228" r="3" />
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section id="servicios">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Servicios</h2>
+      <p>Trabajo en cada etapa de un proceso industrial: desde el control en planta hasta el software que lo supervisa.</p>
+    </div>
+
+    <div class="services-list">
+      <div class="service-row reveal">
+        <h3>Automatización industrial y PLC</h3>
+        <p>Programación y puesta en marcha de PLCs y equipos industriales, diseño de lógica de control y migración de sistemas antiguos a plataformas actuales.</p>
+      </div>
+      <div class="service-row reveal">
+        <h3>Robótica y líneas de producción</h3>
+        <p>Integración de robots y estaciones automatizadas, diseño de celdas de trabajo y sistemas que coordinan múltiples equipos en una misma línea.</p>
+      </div>
+      <div class="service-row reveal">
+        <h3>Sistemas para automatizar procesos</h3>
+        <p>Desarrollo de soluciones a medida que reemplazan tareas manuales por procesos automáticos, adaptadas a la planta y al equipo existente.</p>
+      </div>
+      <div class="service-row reveal">
+        <h3>IoT, dashboards y monitoreo</h3>
+        <p>Recolección de datos de planta, tableros de monitoreo en tiempo real y alertas para seguir la producción desde cualquier lugar.</p>
+      </div>
+      <div class="service-row reveal">
+        <h3>Bases de datos y control de stock</h3>
+        <p>Sistemas de gestión de inventario y bases de datos conectadas a planta para llevar el control de materiales y producción.</p>
+      </div>
+      <div class="service-row reveal">
+        <h3>Mantenimiento eléctrico y electrónico</h3>
+        <p>Mantenimiento preventivo y correctivo de máquinas automáticas, tableros eléctricos y componentes electrónicos de control.</p>
+      </div>
+      <div class="service-row reveal">
+        <h3>Sistemas fullstack personalizados</h3>
+        <p>Desarrollo de aplicaciones web a medida para gestión, monitoreo o administración, conectadas o no a un proceso industrial.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="projects" id="proyectos">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Proyectos</h2>
+      <p><!-- EDITAR: reemplazar por proyectos reales cuando los tengas --> Algunos trabajos de automatización y desarrollo realizados. Las imágenes son de ejemplo — reemplazalas por fotos reales de tus proyectos.</p>
+    </div>
+  </div>
+  <div class="belt-viewport">
+    <div class="belt-track">
+      <div class="project-card">
+        <img src="https://placehold.co/600x400/1B2530/EBF4FF?text=Foto+de+proyecto+1" alt="Foto de ejemplo de proyecto 1 — reemplazar">
+        <p><!-- EDITAR: nombre del proyecto -->Línea de envasado automatizada</p>
+      </div>
+      <div class="project-card">
+        <img src="https://placehold.co/600x400/1B2530/EBF4FF?text=Foto+de+proyecto+2" alt="Foto de ejemplo de proyecto 2 — reemplazar">
+        <p><!-- EDITAR: nombre del proyecto -->Tablero de control PLC</p>
+      </div>
+      <div class="project-card">
+        <img src="https://placehold.co/600x400/1B2530/EBF4FF?text=Foto+de+proyecto+3" alt="Foto de ejemplo de proyecto 3 — reemplazar">
+        <p><!-- EDITAR: nombre del proyecto -->Dashboard de monitoreo IoT</p>
+      </div>
+      <div class="project-card">
+        <img src="https://placehold.co/600x400/1B2530/EBF4FF?text=Foto+de+proyecto+4" alt="Foto de ejemplo de proyecto 4 — reemplazar">
+        <p><!-- EDITAR: nombre del proyecto -->Celda robótica</p>
+      </div>
+      <!-- Se repite la misma tanda para que la cinta sea continua -->
+      <div class="project-card" aria-hidden="true">
+        <img src="https://placehold.co/600x400/1B2530/EBF4FF?text=Foto+de+proyecto+1" alt="">
+        <p>Línea de envasado automatizada</p>
+      </div>
+      <div class="project-card" aria-hidden="true">
+        <img src="https://placehold.co/600x400/1B2530/EBF4FF?text=Foto+de+proyecto+2" alt="">
+        <p>Tablero de control PLC</p>
+      </div>
+      <div class="project-card" aria-hidden="true">
+        <img src="https://placehold.co/600x400/1B2530/EBF4FF?text=Foto+de+proyecto+3" alt="">
+        <p>Dashboard de monitoreo IoT</p>
+      </div>
+      <div class="project-card" aria-hidden="true">
+        <img src="https://placehold.co/600x400/1B2530/EBF4FF?text=Foto+de+proyecto+4" alt="">
+        <p>Celda robótica</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="sobre-mi">
+  <div class="wrap about-grid">
+    <div class="reveal">
+      <h2>Quiénes somos</h2>
+      <p><!-- EDITAR: ajustar si querés agregar algo más --> NauCO Automation acompaña a empresas industriales en todas las etapas de un proyecto de automatización: diseño de la solución, programación, puesta en marcha y mantenimiento posterior. Cuando el alcance lo requiere, se suma una red de especialistas y empresas asociadas para cubrir electricidad industrial, mecatrónica y gestión de proyectos.</p>
+    </div>
+    <div class="about-photo reveal">
+      <!-- EDITAR: reemplazar por una foto real (un tablero, una línea, el equipo trabajando, etc.) -->
+      <img src="https://placehold.co/700x600/2B6CB0/EBF4FF?text=Foto+aqu%C3%AD" alt="Foto de ejemplo — reemplazar por una foto real">
+    </div>
+  </div>
+</section>
+
+<section id="colaboradores">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Con quién trabajo</h2>
+      <p>Para proyectos que necesitan otro perfil o mayor volumen, trabajo junto a colegas y empresas de confianza según lo que pida cada trabajo.</p>
+    </div>
+
+    <div class="collab-list">
+      <div class="collab-row reveal">
+        <div class="collab-name">
+          <h3>Diego García</h3>
+          <span>DG Automatización</span>
+        </div>
+        <p>Programación industrial: PLC, SCADA y HMI, además de electricidad industrial y puesta en marcha de equipos.</p>
+        <a class="collab-link" href="https://dgautomacion.com.ar/" target="_blank" rel="noopener">Visitar sitio</a>
+      </div>
+      <div class="collab-row reveal">
+        <div class="collab-name">
+          <h3>Automática Rosario</h3>
+          <span>Empresa</span>
+        </div>
+        <p>Mecatrónica: integración de robots, control de movimiento, retrofitting y fabricación de tableros eléctricos.</p>
+        <a class="collab-link" href="https://automaticarosario.com.ar/" target="_blank" rel="noopener">Visitar sitio</a>
+      </div>
+      <div class="collab-row reveal">
+        <div class="collab-name">
+          <h3>Pablo Paleari</h3>
+          <span>IGP Consulting</span>
+        </div>
+        <p>Project management y mejora de procesos, para acompañar la parte de gestión en proyectos más grandes.</p>
+        <a class="collab-link" href="https://www.igpconsulting.com.ar/" target="_blank" rel="noopener">Visitar sitio</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contacto">
+  <div class="wrap contact-grid">
+    <div class="contact-info reveal">
+      <div class="section-head" style="margin-bottom:28px;">
+        <h2>Hablemos de tu proyecto</h2>
+        <p>Contame qué necesitás automatizar y te respondo a la brevedad.</p>
+      </div>
+
+      <div class="contact-line">
+        <span>Email</span>
+        <a href="mailto:contacto@naucoautomation.com"><!-- EDITAR: tu email --> contacto@naucoautomation.com</a>
+      </div>
+      <div class="contact-line">
+        <span>Teléfono / WhatsApp</span>
+        <a href="tel:+549000000000"><!-- EDITAR: tu teléfono --> +54 9 000 000-0000</a>
+      </div>
+      <div class="contact-line">
+        <span>Ubicación</span>
+        <strong><!-- EDITAR: tu ciudad si querés mostrarla -->Rosario, Santa Fe, Argentina</strong>
+      </div>
+    </div>
+
+    <form name="contacto" method="POST" data-netlify="true" class="reveal">
+      <input type="hidden" name="form-name" value="contacto" />
+      <div>
+        <label for="nombre">Nombre</label>
+        <input type="text" id="nombre" name="nombre" required>
+      </div>
+      <div>
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      <div>
+        <label for="mensaje">Contame sobre tu proyecto</label>
+        <textarea id="mensaje" name="mensaje" required></textarea>
+      </div>
+      <button class="form-submit" type="submit">Enviar mensaje</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap footer-row">
+    <div class="logo"><img src="logo-icon.png" alt="Logo NauCO Automation">NauCO<span>·</span>Automation</div>
+    <div>&copy; 2026 NauCO Automation. Todos los derechos reservados.</div>
+  </div>
+</footer>
+
+<script>
+  var siteHeader = document.querySelector('header');
+  function onScroll() {
+    if (window.scrollY > 40) {
+      siteHeader.classList.add('scrolled');
+    } else {
+      siteHeader.classList.remove('scrolled');
+    }
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    var revealEls = document.querySelectorAll('.reveal');
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    revealEls.forEach(function (el) { io.observe(el); });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function (el) {
+      el.classList.add('in-view');
+    });
+  }
+</script>
+
+</body>
+</html>
