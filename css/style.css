@@ -67,16 +67,10 @@ img, svg { max-width: 100%; display: block; }
   50% { opacity: 0.35; }
 }
 
-@keyframes belt-scroll {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   * { transition: none !important; animation: none !important; }
   .reveal { opacity: 1; transform: none; }
-  .belt-track { transform: none !important; }
 }
 
 /* ---------- Header / nav ---------- */
@@ -433,42 +427,169 @@ section { padding: 84px 0; }
   .collab-link { justify-self: start; }
 }
 
-/* ---------- Proyectos (cinta con movimiento continuo) ---------- */
+/* ---------- Proyectos (carrusel manual con flechas) ---------- */
 
-.projects { background: var(--navy-2); padding: 72px 0; overflow: hidden; }
+.projects {
+  background: var(--navy-2);
+  padding: 72px 0;
+  overflow: hidden;
+}
 
 .projects .section-head h2,
-.projects .section-head p { color: var(--white); }
+.projects .section-head p {
+  color: var(--white);
+}
 
-.projects .section-head p { color: var(--gray-light); }
+.projects .section-head p {
+  color: var(--gray-light);
+}
 
-.belt-viewport { overflow: hidden; }
+.carousel-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.belt-viewport {
+  width: 100%;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding: 10px 4px 18px;
+}
+
+.belt-viewport::-webkit-scrollbar {
+  display: none;
+}
 
 .belt-track {
   display: flex;
-  gap: 20px;
+  gap: 24px;
   width: max-content;
-  animation: belt-scroll 28s linear infinite;
 }
 
-.belt-viewport:hover .belt-track { animation-play-state: paused; }
-
 .project-card {
-  flex: 0 0 auto;
-  width: 300px;
+  flex: 0 0 320px;
+  width: 320px;
+  scroll-snap-align: start;
+  transition: transform 0.25s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-4px);
 }
 
 .project-card img {
   width: 100%;
-  height: 200px;
+  height: 210px;
   object-fit: cover;
   border-radius: var(--radius);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+  background: var(--navy);
+  cursor: zoom-in;
+  transition: filter 0.25s ease;
+}
+
+.project-card:hover img {
+  filter: brightness(1.06);
 }
 
 .project-card p {
-  margin: 10px 2px 0;
-  font-size: 0.88rem;
-  color: var(--gray-light);
+  margin: 12px 2px 0;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--blue-light);
+}
+
+.carousel-arrow {
+  position: absolute;
+  top: calc(50% - 15px);
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(19, 26, 34, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.carousel-arrow.prev {
+  left: -20px;
+}
+
+.carousel-arrow.next {
+  right: -20px;
+}
+
+.carousel-arrow:hover {
+  background: var(--blue);
+  border-color: var(--blue);
+  transform: translateY(-50%) scale(1.08);
+  box-shadow: 0 6px 20px rgba(43, 108, 176, 0.4);
+}
+
+.carousel-arrow:active {
+  transform: translateY(-50%) scale(0.96);
+}
+
+@media (max-width: 768px) {
+  .carousel-arrow {
+    width: 38px;
+    height: 38px;
+  }
+  .carousel-arrow.prev {
+    left: -8px;
+  }
+  .carousel-arrow.next {
+    right: -8px;
+  }
+  .project-card {
+    flex: 0 0 280px;
+    width: 280px;
+  }
+  .project-card img {
+    height: 180px;
+  }
+}
+
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.carousel-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: none;
+  padding: 0;
+  background: rgba(255, 255, 255, 0.25);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.carousel-dot:hover {
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.carousel-dot.active {
+  background: var(--amber);
+  width: 24px;
+  border-radius: 5px;
 }
 
 /* ---------- About ---------- */
@@ -503,6 +624,7 @@ section { padding: 84px 0; }
   object-fit: cover;
   transform: scale(1.08);
   animation: about-zoom 14s ease-in-out infinite alternate;
+  cursor: zoom-in;
 }
 
 @keyframes about-zoom {
@@ -633,3 +755,102 @@ footer {
 }
 
 .footer-row .logo { font-size: 0.95rem; }
+
+/* ---------- Lightbox (Ampliación de imagen) ---------- */
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(10, 15, 20, 0.92);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+  cursor: zoom-out;
+}
+
+.lightbox.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.lightbox-content {
+  position: relative;
+  max-width: 92vw;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: zoom-out;
+}
+
+.lightbox-content img {
+  max-width: 100%;
+  max-height: 80vh;
+  object-fit: contain;
+  border-radius: var(--radius);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+  transform: scale(0.92);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: zoom-out;
+  background: var(--navy);
+}
+
+.lightbox.is-open .lightbox-content img {
+  transform: scale(1);
+}
+
+.lightbox-caption {
+  margin: 14px 0 0;
+  color: var(--blue-light);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 500;
+  text-align: center;
+  max-width: 75ch;
+  user-select: none;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: -42px;
+  right: 0;
+  background: transparent;
+  border: none;
+  color: var(--white);
+  font-size: 2.2rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 4px 8px;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.lightbox-close:hover {
+  color: var(--amber);
+  transform: scale(1.1);
+}
+
+@media (max-width: 600px) {
+  .lightbox {
+    padding: 16px;
+  }
+  .lightbox-content img {
+    max-height: 75vh;
+  }
+  .lightbox-caption {
+    font-size: 0.95rem;
+    margin-top: 10px;
+  }
+  .lightbox-close {
+    top: -38px;
+    font-size: 1.8rem;
+  }
+}
+

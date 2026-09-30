@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>NauCO Automation — Automatización industrial y sistemas a medida</title>
+<title>NauCO Automatización — Automatización industrial y sistemas a medida</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
@@ -13,7 +13,7 @@
 
 <header>
   <div class="wrap nav-row">
-    <div class="logo"><img src="img/logo-icon.png" alt="Logo NauCO Automation">NauCO<span>·</span>Automation</div>
+    <div class="logo"><img src="img/logo-icon.png" alt="Logo NauCO Automation">NauCO<span>·</span>Automatización</div>
     <button class="nav-toggle" id="navToggle" type="button" aria-label="Abrir menú de navegación" aria-expanded="false" aria-controls="primaryNav">
       <span></span>
       <span></span>
@@ -136,43 +136,43 @@
       <h2>Proyectos</h2>
       <p><!-- EDITAR: reemplazar por proyectos reales cuando los tengas --> Algunos trabajos de automatización y desarrollo realizados. Las imágenes son de ejemplo — reemplazalas por fotos reales de tus proyectos.</p>
     </div>
-  </div>
-  <div class="belt-viewport">
-    <div class="belt-track">
-      <div class="project-card">
-        <img src="https://placehold.co/600x400/1B2530/EBF4FF?text=Foto+de+proyecto+1" alt="Foto de ejemplo de proyecto 1 — reemplazar">
-        <p><!-- EDITAR: nombre del proyecto -->Línea de envasado automatizada</p>
+
+    <div class="carousel-container reveal">
+      <button class="carousel-arrow prev" id="projPrev" type="button" aria-label="Ver proyecto anterior" title="Proyecto anterior">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+      </button>
+
+      <div class="belt-viewport" id="projViewport">
+        <div class="belt-track">
+          <div class="project-card">
+            <img src="img/proyecto1.png" alt="SCADA Html Linea de producción pintura">
+            <p><!-- EDITAR: nombre del proyecto -->SCADA Html Linea de producción pintura</p>
+          </div>
+          <div class="project-card">
+            <img src="https://placehold.co/600x400/1B2530/EBF4FF?text=Foto+de+proyecto+2" alt="Foto de ejemplo de proyecto 2 — reemplazar">
+            <p><!-- EDITAR: nombre del proyecto -->Tablero de control PLC</p>
+          </div>
+          <div class="project-card">
+            <img src="https://placehold.co/600x400/1B2530/EBF4FF?text=Foto+de+proyecto+3" alt="Foto de ejemplo de proyecto 3 — reemplazar">
+            <p><!-- EDITAR: nombre del proyecto -->Dashboard de monitoreo IoT</p>
+          </div>
+          <div class="project-card">
+            <img src="https://placehold.co/600x400/1B2530/EBF4FF?text=Foto+de+proyecto+4" alt="Foto de ejemplo de proyecto 4 — reemplazar">
+            <p><!-- EDITAR: nombre del proyecto -->Celda robótica</p>
+          </div>
+        </div>
       </div>
-      <div class="project-card">
-        <img src="https://placehold.co/600x400/1B2530/EBF4FF?text=Foto+de+proyecto+2" alt="Foto de ejemplo de proyecto 2 — reemplazar">
-        <p><!-- EDITAR: nombre del proyecto -->Tablero de control PLC</p>
-      </div>
-      <div class="project-card">
-        <img src="https://placehold.co/600x400/1B2530/EBF4FF?text=Foto+de+proyecto+3" alt="Foto de ejemplo de proyecto 3 — reemplazar">
-        <p><!-- EDITAR: nombre del proyecto -->Dashboard de monitoreo IoT</p>
-      </div>
-      <div class="project-card">
-        <img src="https://placehold.co/600x400/1B2530/EBF4FF?text=Foto+de+proyecto+4" alt="Foto de ejemplo de proyecto 4 — reemplazar">
-        <p><!-- EDITAR: nombre del proyecto -->Celda robótica</p>
-      </div>
-      <!-- Se repite la misma tanda para que la cinta sea continua -->
-      <div class="project-card" aria-hidden="true">
-        <img src="https://placehold.co/600x400/1B2530/EBF4FF?text=Foto+de+proyecto+1" alt="">
-        <p>Línea de envasado automatizada</p>
-      </div>
-      <div class="project-card" aria-hidden="true">
-        <img src="https://placehold.co/600x400/1B2530/EBF4FF?text=Foto+de+proyecto+2" alt="">
-        <p>Tablero de control PLC</p>
-      </div>
-      <div class="project-card" aria-hidden="true">
-        <img src="https://placehold.co/600x400/1B2530/EBF4FF?text=Foto+de+proyecto+3" alt="">
-        <p>Dashboard de monitoreo IoT</p>
-      </div>
-      <div class="project-card" aria-hidden="true">
-        <img src="https://placehold.co/600x400/1B2530/EBF4FF?text=Foto+de+proyecto+4" alt="">
-        <p>Celda robótica</p>
-      </div>
+
+      <button class="carousel-arrow next" id="projNext" type="button" aria-label="Ver siguiente proyecto" title="Siguiente proyecto">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </button>
     </div>
+
+    <div class="carousel-dots" id="projDots" aria-label="Paginación de proyectos"></div>
   </div>
 </section>
 
@@ -235,7 +235,7 @@
 
       <div class="contact-line">
         <span>Email</span>
-        <a href="mailto:contacto@naucoautomation.com"><!-- EDITAR: tu email --> contacto@naucoautomation.com</a>
+        <a href="mailto:contacto@naucoautomatizacion.com"><!-- EDITAR: tu email --> contacto@naucoautomatizacion.com</a>
       </div>
       <div class="contact-line">
         <span>Teléfono / WhatsApp</span>
@@ -268,10 +268,19 @@
 
 <footer>
   <div class="wrap footer-row">
-    <div class="logo"><img src="img/logo-icon.png" alt="Logo NauCO Automation">NauCO<span>·</span>Automation</div>
-    <div>&copy; 2026 NauCO Automation. Todos los derechos reservados.</div>
+    <div class="logo"><img src="img/logo-icon.png" alt="Logo NauCO Automation">NauCO<span>·</span>Automatización</div>
+    <div>&copy; 2026 NauCO Automatización. Todos los derechos reservados.</div>
   </div>
 </footer>
+
+<!-- Lightbox para ampliar imágenes -->
+<div class="lightbox" id="imageLightbox" aria-hidden="true" role="dialog" aria-modal="true">
+  <div class="lightbox-content">
+    <button class="lightbox-close" id="lightboxClose" type="button" aria-label="Cerrar imagen ampliada">&times;</button>
+    <img src="" alt="" id="lightboxImg">
+    <p class="lightbox-caption" id="lightboxCaption"></p>
+  </div>
+</div>
 
 <script src="js/script.js"></script>
 
