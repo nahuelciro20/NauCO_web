@@ -34,8 +34,8 @@
 <section class="hero">
   <div class="wrap hero-grid">
     <div>
-      <h1>Automatización industrial y sistemas a medida para tu línea de producción.</h1>
-      <p class="lead">Programación de PLC, robótica, monitoreo de datos en tiempo real y desarrollo de software para plantas y procesos industriales.</p>
+      <h1>Automatización y sistemas a medida para tu empresa o negocio.</h1>
+      <p class="lead">Programación de PLC, robótica, monitoreo de datos en tiempo real y desarrollo de software para cualquier tipo de empresa, negocio e industria.</p>
       <div class="hero-actions">
         <a class="btn btn-primary" href="#contacto">Hablemos de tu proyecto</a>
         <a class="btn btn-ghost" href="#servicios">Ver servicios</a>
@@ -134,7 +134,7 @@
   <div class="wrap">
     <div class="section-head reveal">
       <h2>Proyectos</h2>
-      <p><!-- EDITAR: reemplazar por proyectos reales cuando los tengas --> Algunos trabajos de automatización y desarrollo realizados. Las imágenes son de ejemplo — reemplazalas por fotos reales de tus proyectos.</p>
+      <p><!-- EDITAR: reemplazar por proyectos reales cuando los tengas --> Algunos trabajos de automatización y desarrollo realizados.</p>
     </div>
 
     <div class="carousel-container reveal">
@@ -146,20 +146,21 @@
 
       <div class="belt-viewport" id="projViewport">
         <div class="belt-track">
-          <div class="project-card">
-            <img src="img/proyecto1.png" alt="SCADA Html Linea de producción pintura">
-            <p><!-- EDITAR: nombre del proyecto -->SCADA Html Linea de producción pintura</p>
+          <!-- EDITAR: En data-gallery podés agregar todas las fotos del proyecto separadas por comas -->
+          <div class="project-card" data-gallery="img/proyecto1_1.png, img/proyecto1_2.png, img/proyecto1_3.png, img/proyecto1_4.jpg, img/proyecto1_5.jpg, img/proyecto1_6.png, img/proyecto1_7.jpg">
+            <img src="img/proyecto1_1.png" alt="SCADA Html Linea de producción pintura">
+            <p><!-- EDITAR: nombre del proyecto -->Sistema ProdGest gestión de producción</p>
           </div>
-          <div class="project-card">
-            <img src="https://placehold.co/600x400/1B2530/EBF4FF?text=Foto+de+proyecto+2" alt="Foto de ejemplo de proyecto 2 — reemplazar">
+          <div class="project-card" data-gallery="img/proyecto2.png, img/20260418_090341.jpg">
+            <img src="img/proyecto2.png" alt="Tablero de control PLC">
             <p><!-- EDITAR: nombre del proyecto -->Tablero de control PLC</p>
           </div>
-          <div class="project-card">
-            <img src="https://placehold.co/600x400/1B2530/EBF4FF?text=Foto+de+proyecto+3" alt="Foto de ejemplo de proyecto 3 — reemplazar">
+          <div class="project-card" data-gallery="img/proyecto3.png">
+            <img src="img/proyecto3.png" alt="Dashboard de monitoreo IoT">
             <p><!-- EDITAR: nombre del proyecto -->Dashboard de monitoreo IoT</p>
           </div>
-          <div class="project-card">
-            <img src="https://placehold.co/600x400/1B2530/EBF4FF?text=Foto+de+proyecto+4" alt="Foto de ejemplo de proyecto 4 — reemplazar">
+          <div class="project-card" data-gallery="img/proyecto4.png, img/proyecto5.jpg, img/proyecto6.jpg">
+            <img src="img/proyecto4.png" alt="Celda robótica">
             <p><!-- EDITAR: nombre del proyecto -->Celda robótica</p>
           </div>
         </div>
@@ -184,7 +185,7 @@
     </div>
     <div class="about-photo reveal">
       <!-- EDITAR: reemplazar por una foto real (un tablero, una línea, el equipo trabajando, etc.) -->
-      <img src="https://placehold.co/700x600/2B6CB0/EBF4FF?text=Foto+aqu%C3%AD" alt="Foto de ejemplo — reemplazar por una foto real">
+      <img src="img/logo-full.png" alt="Foto de ejemplo">
     </div>
   </div>
 </section>
@@ -239,7 +240,7 @@
       </div>
       <div class="contact-line">
         <span>Teléfono / WhatsApp</span>
-        <a href="tel:+549000000000"><!-- EDITAR: tu teléfono --> +54 9 000 000-0000</a>
+        <a href="https://wa.me/5493416868560?text=Hola%2C%20quisiera%20hacerles%20una%20consulta%20sobre%20un%20proyecto" target="_blank" rel="noopener noreferrer">+54 9 341 686-8560</a>
       </div>
       <div class="contact-line">
         <span>Ubicación</span>
@@ -273,13 +274,31 @@
   </div>
 </footer>
 
-<!-- Lightbox para ampliar imágenes -->
+<!-- Lightbox para ampliar imágenes con galería por proyecto -->
 <div class="lightbox" id="imageLightbox" aria-hidden="true" role="dialog" aria-modal="true">
+  <button class="lightbox-close" id="lightboxClose" type="button" aria-label="Cerrar imagen ampliada" title="Cerrar (Esc)">&times;</button>
+  
+  <button class="lightbox-nav-btn prev" id="lightboxPrev" type="button" aria-label="Imagen anterior" title="Anterior (Flecha izquierda)">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <polyline points="15 18 9 12 15 6"></polyline>
+    </svg>
+  </button>
+
   <div class="lightbox-content">
-    <button class="lightbox-close" id="lightboxClose" type="button" aria-label="Cerrar imagen ampliada">&times;</button>
-    <img src="" alt="" id="lightboxImg">
-    <p class="lightbox-caption" id="lightboxCaption"></p>
+    <div class="lightbox-img-wrap">
+      <img src="" alt="" id="lightboxImg">
+    </div>
+    <div class="lightbox-footer">
+      <p class="lightbox-caption" id="lightboxCaption"></p>
+      <span class="lightbox-counter" id="lightboxCounter"></span>
+    </div>
   </div>
+
+  <button class="lightbox-nav-btn next" id="lightboxNext" type="button" aria-label="Siguiente imagen" title="Siguiente (Flecha derecha)">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </button>
 </div>
 
 <script src="js/script.js"></script>
