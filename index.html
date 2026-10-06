@@ -34,8 +34,8 @@
 <section class="hero">
   <div class="wrap hero-grid">
     <div>
-      <h1>Automatización y sistemas a medida para tu empresa o negocio.</h1>
-      <p class="lead">Programación de PLC, robótica, monitoreo de datos en tiempo real y desarrollo de software para cualquier tipo de empresa, negocio e industria.</p>
+      <h1>Desarrollo de software a medida y automatización de procesos</h1>
+      <p class="lead">Creación de sistemas de gestión para comercios y empresas: control de stock, seguimiento de pedidos y órdenes de trabajo, gestión de colas y bases de datos SQL. Integración con programación de PLC y monitoreo de datos en tiempo real para plantas industriales.</p>
       <div class="hero-actions">
         <a class="btn btn-primary" href="#contacto">Hablemos de tu proyecto</a>
         <a class="btn btn-ghost" href="#servicios">Ver servicios</a>
@@ -43,47 +43,64 @@
     </div>
     <div class="hero-diagram" aria-hidden="true">
       <svg viewBox="0 0 460 340" xmlns="http://www.w3.org/2000/svg">
-        <!-- Líneas: PLC al centro, conectado a cada nodo -->
+        <!-- Líneas: Estructura de puente entre Industria y Software -->
         <g fill="none" stroke="#2B6CB0" stroke-width="1.5">
-          <path d="M195 170 H120" />
-          <path d="M215 145 L175 75" />
-          <path d="M255 145 L285 75" />
-          <path d="M265 170 H340" />
-          <path d="M255 195 L285 265" />
-          <path d="M215 195 L175 265" />
+          <!-- Eje horizontal -->
+          <path d="M130 170 H195" />
+          <path d="M265 170 H330" />
+          <!-- Conexiones PLC (Izquierda) -->
+          <path d="M95 94 V140" />
+          <path d="M95 200 V245" />
+          <!-- Conexiones Centro (Datos) -->
+          <path d="M230 95 V150" />
+          <path d="M230 190 V245" />
+          <!-- Conexiones Web App (Derecha) -->
+          <path d="M370 95 V140" />
+          <path d="M370 200 V245" />
         </g>
 
-        <!-- PLC central -->
-        <rect x="195" y="140" width="70" height="60" rx="4" fill="#1B2530" stroke="#ED8936" stroke-width="1.5" />
-        <text x="230" y="175" text-anchor="middle" font-family="Space Grotesk" font-size="13" fill="#F7FAFC" font-weight="600">PLC</text>
+        <!-- PILAR 1: INDUSTRIAL (Izquierda) -->
+        <rect x="60" y="140" width="70" height="60" rx="4" fill="#1B2530" stroke="#ED8936" stroke-width="1.5" />
+        <text x="95" y="175" text-anchor="middle" font-family="Space Grotesk" font-size="13" fill="#F7FAFC" font-weight="600">PLC</text>
 
-        <!-- Nodos periféricos -->
-        <circle cx="120" cy="170" r="24" fill="#1B2530" stroke="#2B6CB0" stroke-width="1.5" />
-        <text x="120" y="174" text-anchor="middle" font-family="IBM Plex Sans" font-size="8" fill="#A0AEC0">SENSOR</text>
+        <circle cx="95" cy="70" r="24" fill="#1B2530" stroke="#2B6CB0" stroke-width="1.5" />
+        <text x="95" y="74" text-anchor="middle" font-family="IBM Plex Sans" font-size="8" fill="#A0AEC0">SENSOR</text>
 
-        <rect x="140" y="55" width="70" height="40" rx="4" fill="#1B2530" stroke="#2B6CB0" stroke-width="1.5" />
-        <text x="175" y="79" text-anchor="middle" font-family="IBM Plex Sans" font-size="9" fill="#A0AEC0">SCADA</text>
+        <rect x="60" y="245" width="70" height="40" rx="4" fill="#1B2530" stroke="#2B6CB0" stroke-width="1.5" />
+        <text x="95" y="269" text-anchor="middle" font-family="IBM Plex Sans" font-size="9" fill="#A0AEC0">SCADA</text>
 
-        <rect x="250" y="55" width="70" height="40" rx="4" fill="#1B2530" stroke="#2B6CB0" stroke-width="1.5" />
-        <text x="285" y="79" text-anchor="middle" font-family="IBM Plex Sans" font-size="9" fill="#A0AEC0">IOT</text>
+        <!-- PUENTE: DATOS (Centro) -->
+        <rect x="195" y="150" width="70" height="40" rx="4" fill="#1B2530" stroke="#2B6CB0" stroke-width="1.5" />
+        <text x="230" y="174" text-anchor="middle" font-family="IBM Plex Sans" font-size="9" fill="#A0AEC0">SQL DB</text>
 
-        <rect x="340" y="150" width="72" height="40" rx="4" fill="#1B2530" stroke="#2B6CB0" stroke-width="1.5" />
-        <text x="376" y="174" text-anchor="middle" font-family="IBM Plex Sans" font-size="8.5" fill="#A0AEC0">WEBAPP</text>
+        <rect x="195" y="55" width="70" height="40" rx="4" fill="#1B2530" stroke="#2B6CB0" stroke-width="1.5" />
+        <text x="230" y="79" text-anchor="middle" font-family="IBM Plex Sans" font-size="9" fill="#A0AEC0">IoT</text>
 
-        <rect x="250" y="245" width="70" height="40" rx="4" fill="#1B2530" stroke="#2B6CB0" stroke-width="1.5" />
-        <text x="285" y="269" text-anchor="middle" font-family="IBM Plex Sans" font-size="9" fill="#A0AEC0">SQL</text>
+        <rect x="195" y="245" width="70" height="40" rx="4" fill="#1B2530" stroke="#2B6CB0" stroke-width="1.5" />
+        <text x="230" y="269" text-anchor="middle" font-family="IBM Plex Sans" font-size="9" fill="#A0AEC0">API</text>
 
-        <rect x="140" y="245" width="70" height="40" rx="4" fill="#1B2530" stroke="#2B6CB0" stroke-width="1.5" />
-        <text x="175" y="269" text-anchor="middle" font-family="IBM Plex Sans" font-size="9" fill="#A0AEC0">IOT DATA</text>
+        <!-- PILAR 2: SOFTWARE DE NEGOCIOS (Derecha) -->
+        <rect x="330" y="140" width="80" height="60" rx="4" fill="#1B2530" stroke="#ED8936" stroke-width="1.5" />
+        <text x="370" y="175" text-anchor="middle" font-family="Space Grotesk" font-size="13" fill="#F7FAFC" font-weight="600">WEB APP</text>
+
+        <rect x="335" y="55" width="70" height="40" rx="4" fill="#1B2530" stroke="#2B6CB0" stroke-width="1.5" />
+        <text x="370" y="79" text-anchor="middle" font-family="IBM Plex Sans" font-size="9" fill="#A0AEC0">STOCK</text>
+
+        <rect x="335" y="245" width="70" height="40" rx="4" fill="#1B2530" stroke="#2B6CB0" stroke-width="1.5" />
+        <text x="370" y="269" text-anchor="middle" font-family="IBM Plex Sans" font-size="9" fill="#A0AEC0">MÉTRICAS</text>
 
         <!-- Luces de señal recorriendo la red -->
         <g fill="#ED8936">
-          <circle class="pulse" style="animation-delay:0s" cx="158" cy="170" r="3" />
-          <circle class="pulse" style="animation-delay:0.3s" cx="218" cy="112" r="3" />
-          <circle class="pulse" style="animation-delay:0.6s" cx="268" cy="112" r="3" />
-          <circle class="pulse" style="animation-delay:0.9s" cx="303" cy="170" r="3" />
-          <circle class="pulse" style="animation-delay:1.2s" cx="268" cy="228" r="3" />
-          <circle class="pulse" style="animation-delay:1.5s" cx="218" cy="228" r="3" />
+          <!-- Flujos horizontales -->
+          <circle class="pulse" style="animation-delay:0s" cx="162" cy="170" r="3" />
+          <circle class="pulse" style="animation-delay:0.6s" cx="297" cy="170" r="3" />
+          <!-- Flujos verticales Planta -->
+          <circle class="pulse" style="animation-delay:0.3s" cx="95" cy="117" r="3" />
+          <circle class="pulse" style="animation-delay:1.2s" cx="95" cy="222" r="3" />
+          <!-- Flujos verticales Centro -->
+          <circle class="pulse" style="animation-delay:0.9s" cx="230" cy="122" r="3" />
+          <!-- Flujos verticales Software -->
+          <circle class="pulse" style="animation-delay:1.5s" cx="370" cy="117" r="3" />
         </g>
       </svg>
     </div>
@@ -92,41 +109,60 @@
 
 <section id="servicios">
   <div class="wrap">
+    
     <div class="section-head reveal">
       <h2>Servicios</h2>
-      <p>Trabajo en cada etapa de un proceso industrial: desde el control en planta hasta el software que lo supervisa.</p>
+      <p>Soluciones tecnológicas a medida. Conectamos los equipos de tu planta y desarrollamos el software que tu empresa necesita para escalar.</p>
+    </div>
+
+    <!-- ÁREA 1: SOFTWARE Y NEGOCIOS -->
+    <div class="category-header reveal">
+      <h3>💻 Software y Gestión para Negocios</h3>
+    </div>
+    
+    <div class="services-list bloque-superior">
+      <div class="service-row reveal">
+        <h4>Sistemas de Gestión Comercial</h4>
+        <p>Desarrollo de software a medida para administración de turnos, gestión de colas con pantallas y seguimiento de órdenes de pedido o reparación.</p>
+      </div>
+      <div class="service-row reveal">
+        <h4>Bases de datos y control de stock</h4>
+        <p>Creación de sistemas de inventario con bases de datos SQL para el control exacto de mercadería, entradas/salidas y trazabilidad de productos.</p>
+      </div>
+      <div class="service-row reveal">
+        <h4>Dashboards y Monitoreo</h4>
+        <p>Tableros de métricas en tiempo real para visualizar ventas, horas pico, rendimiento del local y toma de decisiones operativas.</p>
+      </div>
+      <div class="service-row reveal">
+        <h4>Automatización de procesos administrativos</h4>
+        <p>Soluciones para digitalizar planillas, reemplazar tareas manuales por flujos automáticos y centralizar la información de tu negocio.</p>
+      </div>
+    </div>
+
+    <!-- ÁREA 2: AUTOMATIZACIÓN INDUSTRIAL -->
+    <div class="category-header reveal">
+      <h3>⚙️ Automatización Industrial</h3>
     </div>
 
     <div class="services-list">
       <div class="service-row reveal">
-        <h3>Automatización industrial y PLC</h3>
-        <p>Programación y puesta en marcha de PLCs y equipos industriales, diseño de lógica de control y migración de sistemas antiguos a plataformas actuales.</p>
+        <h4>Automatización y PLC</h4>
+        <p>Programación y puesta en marcha de PLCs, diseño de lógica de control y migración de plataformas antiguas a tecnologías actuales.</p>
       </div>
       <div class="service-row reveal">
-        <h3>Robótica y líneas de producción</h3>
-        <p>Integración de robots y estaciones automatizadas, diseño de celdas de trabajo y sistemas que coordinan múltiples equipos en una misma línea.</p>
+        <h4>Robótica y líneas de producción</h4>
+        <p>Integración de celdas de trabajo, automatización de estaciones y sistemas que coordinan múltiples equipos en una misma línea.</p>
       </div>
       <div class="service-row reveal">
-        <h3>Sistemas para automatizar procesos</h3>
-        <p>Desarrollo de soluciones a medida que reemplazan tareas manuales por procesos automáticos, adaptadas a la planta y al equipo existente.</p>
+        <h4>IoT industrial y telemetría</h4>
+        <p>Recolección de datos de planta, conexión de sensores a bases de datos y monitoreo de la producción a distancia en tiempo real.</p>
       </div>
       <div class="service-row reveal">
-        <h3>IoT, dashboards y monitoreo</h3>
-        <p>Recolección de datos de planta, tableros de monitoreo en tiempo real y alertas para seguir la producción desde cualquier lugar.</p>
-      </div>
-      <div class="service-row reveal">
-        <h3>Bases de datos y control de stock</h3>
-        <p>Sistemas de gestión de inventario y bases de datos conectadas a planta para llevar el control de materiales y producción.</p>
-      </div>
-      <div class="service-row reveal">
-        <h3>Mantenimiento eléctrico y electrónico</h3>
-        <p>Mantenimiento preventivo y correctivo de máquinas automáticas, tableros eléctricos y componentes electrónicos de control.</p>
-      </div>
-      <div class="service-row reveal">
-        <h3>Sistemas fullstack personalizados</h3>
-        <p>Desarrollo de aplicaciones web a medida para gestión, monitoreo o administración, conectadas o no a un proceso industrial.</p>
+        <h4>Mantenimiento eléctrico y electrónico</h4>
+        <p>Mantenimiento preventivo y correctivo de maquinaria automática, tableros eléctricos y componentes electrónicos de control.</p>
       </div>
     </div>
+
   </div>
 </section>
 
@@ -180,8 +216,8 @@
 <section class="about" id="sobre-mi">
   <div class="wrap about-grid">
     <div class="reveal">
-      <h2>Quiénes somos</h2>
-      <p><!-- EDITAR: ajustar si querés agregar algo más --> NauCO Automation acompaña a empresas industriales en todas las etapas de un proyecto de automatización: diseño de la solución, programación, puesta en marcha y mantenimiento posterior. Cuando el alcance lo requiere, se suma una red de especialistas y empresas asociadas para cubrir electricidad industrial, mecatrónica y gestión de proyectos.</p>
+      <h2>Quién soy</h2>
+      <p><!-- EDITAR: ajustar si querés agregar algo más --> A través de NauCO Automation, ayudo a las empresas a escalar usando la tecnología y la automatización. Me involucro de principio a fin, trabajando codo a codo con mis clientes en el diseño, programación, instalación y mantenimiento de cada sistema. Mi objetivo es darte soluciones a medida con la agilidad y cercanía que solo un trato directo puede ofrecer.</p>
     </div>
     <div class="about-photo reveal">
       <!-- EDITAR: reemplazar por una foto real (un tablero, una línea, el equipo trabajando, etc.) -->
@@ -194,7 +230,7 @@
   <div class="wrap">
     <div class="section-head reveal">
       <h2>Con quién trabajo</h2>
-      <p>Para proyectos que necesitan otro perfil o mayor volumen, trabajo junto a colegas y empresas de confianza según lo que pida cada trabajo.</p>
+      <p>Cuento con alianzas estratégicas con colegas y empresas de confianza. Trabajo en conjunto con ellos para formar equipos a la medida de cada proyecto, integrando las especialidades necesarias para cubrir cualquier exigencia técnica de tu industria.</p>
     </div>
 
     <div class="collab-list">

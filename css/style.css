@@ -350,6 +350,25 @@ section { padding: 84px 0; }
 
 /* ---------- Services (datasheet list, not cards) ---------- */
 
+/* 1. Títulos principales de cada categoría (Software / Industrial) */
+.category-header {
+  margin-top: 50px; /* Da respiro respecto al texto anterior */
+  margin-bottom: 10px;
+}
+
+.category-header h3 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  /* Le saqué el borde de color que te pasé antes para que no 
+     choque con tus líneas limpias de var(--line) */
+}
+
+/* 2. Separación extra entre el bloque de software y el industrial */
+.services-list.bloque-superior {
+  margin-bottom: 50px;
+}
+
+/* 3. Filas de servicios (Tu diseño original intacto) */
 .service-row {
   display: grid;
   grid-template-columns: 300px 1fr;
@@ -364,17 +383,28 @@ section { padding: 84px 0; }
   padding-left: 12px;
 }
 
-.services-list .service-row:last-child { border-bottom: 1px solid var(--line); }
-
-.service-row h3 {
-  font-size: 1.08rem;
-  font-weight: 600;
+.services-list .service-row:last-child { 
+  border-bottom: 1px solid var(--line); 
 }
 
-.service-row p { margin: 0; font-size: 0.98rem; }
+/* ATENCIÓN ACÁ: Cambiamos de h3 a h4 para los títulos de la grilla */
+.service-row h4 {
+  font-size: 1.08rem;
+  font-weight: 600;
+  margin: 0;
+}
 
+.service-row p { 
+  margin: 0; 
+  font-size: 0.98rem; 
+}
+
+/* Responsive */
 @media (max-width: 700px) {
-  .service-row { grid-template-columns: 1fr; gap: 6px; }
+  .service-row { 
+    grid-template-columns: 1fr; 
+    gap: 6px; 
+  }
 }
 
 /* ---------- Colaboradores ---------- */
