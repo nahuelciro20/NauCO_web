@@ -272,7 +272,7 @@
 
       <div class="contact-line">
         <span>Email</span>
-        <a href="mailto:contacto@naucoautomatizacion.com"><!-- EDITAR: tu email --> contacto@naucoautomatizacion.com</a>
+        <a href="mailto:contacto@naucoautomatizacion.com.ar"><!-- EDITAR: tu email --> contacto@naucoautomatizacion.com.ar</a>
       </div>
       <div class="contact-line">
         <span>Teléfono / WhatsApp</span>
@@ -284,8 +284,9 @@
       </div>
     </div>
 
-    <form name="contacto" method="POST" data-netlify="true" class="reveal">
-      <input type="hidden" name="form-name" value="contacto" />
+    <form action="https://api.web3forms.com/submit" method="POST" class="reveal">
+      <input type="hidden" name="access_key" value="13c114f3-9c67-447d-bb27-a5395c48936d" />
+      
       <div>
         <label for="nombre">Nombre</label>
         <input type="text" id="nombre" name="nombre" required>
