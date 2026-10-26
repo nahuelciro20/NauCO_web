@@ -167,9 +167,18 @@ if (lightbox && lightboxImg) {
     if (lightboxNext) lightboxNext.classList.toggle('is-hidden', !showNav);
   }
 
-  function openGallery(images, startIndex, caption) {
+function openGallery(images, startIndex, caption) {
     currentGallery = images.length > 0 ? images : [''];
     currentCaption = caption || '';
+
+    // Precargar imágenes de la galería en memoria caché
+    currentGallery.forEach(function(src) {
+      if (src) {
+        var preloadImg = new Image();
+        preloadImg.src = src;
+      }
+    });
+
     lightbox.classList.add('is-open');
     lightbox.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
